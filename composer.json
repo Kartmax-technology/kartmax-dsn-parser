@@ -1,5 +1,5 @@
 {
-  "name": "Kartmax-technology/nkartmax-dsn-parser",
+  "name": "kartmax/dsn-parser",
   "description": "A DSN parser for Mysql connection",
   "type": "library",
   "autoload": {
