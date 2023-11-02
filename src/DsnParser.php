@@ -15,7 +15,7 @@ class DsnParser
 
         // Filter out environment variables starting with "DSN_"
         foreach ($_ENV as $key => $value) {
-            if (strpos($key, 'DSN_') === 0) {
+            if (strpos($key, '_DSN_')) {
                 $details = [];
                 $pairs = explode(';', $value); // Split string by semicolon
 

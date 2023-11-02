@@ -10,7 +10,6 @@ class LoadEnv
      */
     public static function load() {
         $envFile = '.env';
-        echo $envFile;
         if (!file_exists($envFile)) {
             throw new Exception('.env file does not exist.');
         }
