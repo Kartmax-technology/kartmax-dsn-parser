@@ -1,10 +1,16 @@
 <?php
 
 namespace LoadEnv;
+use Exception;
+
 class LoadEnv
 {
+    /**
+     * @throws Exception
+     */
     public static function load() {
-        $envFile = __DIR__ . '/.env';
+        $envFile = '.env';
+        echo $envFile;
         if (!file_exists($envFile)) {
             throw new Exception('.env file does not exist.');
         }
