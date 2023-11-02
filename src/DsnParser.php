@@ -26,7 +26,7 @@ class DsnParser
 
                     // Set each parameter as an environment variable if $setEnv is true
                     if ($setEnv) {
-                        putenv("$k=$v");
+                        $_ENV[$k]=$v;
                     }
                 }
 
