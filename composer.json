@@ -5,7 +5,8 @@
   "version": "0.0.1",
   "autoload": {
     "psr-4": {
-      "DsnParser\\": "src/"
+      "DsnParser\\": "src/",
+      "LoadEnv\\": "src/"
     }
   },
   "authors": [
