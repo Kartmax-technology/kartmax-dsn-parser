@@ -2,6 +2,7 @@
   "name": "kartmax/dsn-parser",
   "description": "A DSN parser for Mysql connection to support Laravel, Lumen and Core PHP",
   "type": "library",
+  "version": "0.0.1",
   "autoload": {
     "psr-4": {
       "DsnParser\\": "src/"
@@ -20,6 +21,6 @@
       ]
     }
   },
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "license": "MIT"
 }
