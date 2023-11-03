@@ -5,7 +5,7 @@ A simple DSN parser for PHP projects.
 ## Installation
 
 Via Composer:
-    `composer require kartmax/dsn-parser`
+    `composer require kartmax/dsn-parser "^1.0.2"`
 
 Sample DSN
 
