@@ -12,28 +12,48 @@ class DsnParser
     public static function parse($setEnv = true)
     {
         $dsns = [];
-
-        // Filter out environment variables starting with "DSN_"
         foreach ($_ENV as $key => $value) {
-            if (strpos($key, '_DSN_')) {
-                $details = [];
-                $pairs = explode(';', $value); // Split string by semicolon
+            if (strpos($key, '_DSN_') !== false) {
+                // Remove 'MYSQL_' and 'DSN_' to get the prefix, e.g., "VX_CART_"
+                $prefix = preg_replace('/^MYSQL_/', '', strstr($key, 'DSN_', true));
 
-                // Split each pair into key and value
-                foreach ($pairs as $pair) {
-                    list($k, $v) = explode('=', $pair);
-                    $details[$k] = $v;
+                // Parse the DSN string into components
+                $parsedUrl = parse_url($value);
+                $path = ltrim($parsedUrl['path'], '/'); // Remove the leading slash
 
-                    // Set each parameter as an environment variable if $setEnv is true
-                    if ($setEnv) {
-                        $_ENV[$k]=$v;
+                // Extract the query string parameters like charset
+                $query = [];
+                if (isset($parsedUrl['query'])) {
+                    parse_str($parsedUrl['query'], $query);
+                }
+
+                // Map the components to the $_ENV superglobal
+                $envMapping = [
+                    'host' => "{$prefix}HOST",
+                    'port' => "{$prefix}PORT",
+                    'user' => "{$prefix}USERNAME",
+                    'pass' => "{$prefix}PASSWORD",
+                    'path' => "{$prefix}DATABASE",
+                ];
+
+                foreach ($envMapping as $component => $envKey) {
+                    $valueToSet = $component === 'path' ? $path : ($parsedUrl[$component] ?? null);
+                    if ($valueToSet !== null && $setEnv) {
+                        $_ENV[$envKey] = $valueToSet;
+                        $dsns[$envKey] = $valueToSet;
                     }
                 }
 
-                $dsns[strtolower(substr($key, 4))] = $details;
+                // Set additional parameters like 'charset'
+                foreach ($query as $param => $value) {
+                    $envKey = "{$prefix}DB_" . strtoupper($param);
+                    if ($setEnv) {
+                        $_ENV[$envKey] = $value;
+                        $dsns[$envKey] = $value;
+                    }
+                }
             }
         }
-
         return $dsns;
     }
 }
