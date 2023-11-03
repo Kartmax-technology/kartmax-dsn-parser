@@ -8,6 +8,7 @@ Via Composer:
     `composer require kartmax/dsn-parser`
 
 ## Usage
+
 ```php
 $dsnDetails = DsnParser::parse();
 
