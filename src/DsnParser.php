@@ -46,7 +46,7 @@ class DsnParser
 
                 // Set additional parameters like 'charset'
                 foreach ($query as $param => $value) {
-                    $envKey = "{$prefix}DB_" . strtoupper($param);
+                    $envKey = "{$prefix}" . strtoupper($param);
                     if ($setEnv) {
                         $_ENV[$envKey] = $value;
                         $dsns[$envKey] = $value;
