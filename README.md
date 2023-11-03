@@ -7,6 +7,11 @@ A simple DSN parser for PHP projects.
 Via Composer:
     `composer require kartmax/dsn-parser`
 
+Sample DSN
+
+```
+MYSQL_VX_CART_DB_DSN_READ_ONLY=mysql://user:password@127.0.0.1:3306/dbname?charset=utf8mb4
+```
 ## Usage
 
 ```php
